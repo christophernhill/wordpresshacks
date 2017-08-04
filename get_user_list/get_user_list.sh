@@ -9,3 +9,5 @@ WP_CONFIG=${WP_ROOT}/${WP_INSTANCE}/wp-config.php
 
 # Get key parameters
 dbname=`grep DB_NAME ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
+dbuser=`grep DB_USER ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
+dbpass=`grep DBPASSWORD ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
