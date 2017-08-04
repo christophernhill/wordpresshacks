@@ -11,3 +11,5 @@ WP_CONFIG=${WP_ROOT}/${WP_INSTANCE}/wp-config.php
 dbname=`grep DB_NAME ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
 dbuser=`grep DB_USER ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
 dbpass=`grep DBPASSWORD ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
+
+mysql -u ${dbuser} -p${dbpass} ${dbname}  -e "show tables"   | grep _users
