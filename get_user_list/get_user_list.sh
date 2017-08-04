@@ -12,4 +12,5 @@ dbname=`grep DB_NAME ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047'
 dbuser=`grep DB_USER ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
 dbpass=`grep DBPASSWORD ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
 
-mysql -u ${dbuser} -p${dbpass} ${dbname}  -e "show tables"   | grep _users
+utab=`mysql -u ${dbuser} -p${dbpass} ${dbname}  -e "show tables"   2>&1 | grep _users`
+umtab=`mysql -u ${dbuser} -p${dbpass} ${dbname}  -e "show tables"   2>&1 | grep _usermeta`
