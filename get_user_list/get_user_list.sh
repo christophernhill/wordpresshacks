@@ -8,4 +8,4 @@ WP_ROOT=/var/www/html
 WP_CONFIG=${WP_ROOT}/${WP_INSTANCE}/wp-config.php
 
 # Get key parameters
-grep DB_NAME ${WP_CONFIG}
+dbname=`grep DB_NAME ${WP_CONFIG} | sed 's/define[^ ]*\(.*\)).*/\1/' | tr '\047' ' '`
