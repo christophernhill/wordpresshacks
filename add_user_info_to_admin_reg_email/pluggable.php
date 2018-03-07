@@ -1707,6 +1707,7 @@ function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) 
 
 	global $wpdb, $wp_hasher;
 	$user = get_userdata( $user_id );
+	$user_meta = get_user_meta( $user_id );
 
 	// The blogname option is escaped with esc_html on the way into the database in sanitize_option
 	// we want to reverse this for the plain text arena of emails.
@@ -1715,7 +1716,11 @@ function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) 
 	$message  = sprintf(__('New user registration on your site %s:'), $blogname) . "\r\n\r\n";
 	$message .= sprintf(__('Username: %s'), $user->user_login) . "\r\n\r\n";
 	$message .= sprintf(__('E-mail: %s'), $user->user_email) . "\r\n";
-
+	$message .= sprintf(__('First name: %s'), $user_meta->first_name) . "\r\n";
+	$message .= sprintf(__('Last name: %s'), $user_meta->last_name) . "\r\n";
+	$message .= sprintf(__('Affiliation: %s'),$user_meta->user_affiliation) . "\r\n";
+        $message .= sprintf(__('Country: %s'),$user_meta->country_of_residence) . "\r\n";
+	
 	@wp_mail(get_option('admin_email'), sprintf(__('[%s] New User Registration'), $blogname), $message);
 
 	if ( 'admin' === $notify || empty( $notify ) ) {
